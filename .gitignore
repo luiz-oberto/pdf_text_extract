@@ -163,3 +163,5 @@ cython_debug/
 
 # pasta de arquivos executáveis
 executaveis
+
+texto-extraido.txt

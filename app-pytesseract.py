@@ -8,7 +8,6 @@ pytesseract.pytesseract.tesseract_cmd = r"TESSERACT_PATH"
 caminho_pdf = "CAMINHO_DO_ARQUIVO"
 
 # Adicionando o PATH do poppler
-# C:\Program Files\poppler\poppler-24.07.0\Library\bin
 poppler_path = r"POPPLER_PATH"
 
 # Converter o PDF em imagens
@@ -20,5 +19,8 @@ for i, pagina in enumerate(paginas):
     texto = pytesseract.image_to_string(pagina, lang="por")  # 'por' para português
     texto_completo += f"\n--- Página {i + 1} ---\n{texto}"
 
-# Exibir o texto extraído
-print(texto_completo)
+# extrair todo texto para um arquivo .txt
+with open('__PATH_TO_EXTRACTED_FILE__\\texto-extraido.txt', 'w', encoding='utf-8') as file:
+    file.write(texto_completo)
+
+print("Extração concluida.")
