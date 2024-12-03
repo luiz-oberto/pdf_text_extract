@@ -32,3 +32,6 @@ pip install pillow
 2. [Poppler](https://github.com/oschwartz10612/poppler-windows/releases)
 3. [Arquivos de idioma do Tesseract](https://github.com/tesseract-ocr/tessdata)
 
+### Em desenvolvimento:
+- Fazer filtros mais específicos para obter as informações que preciso extrair de acordo com cada página do arquivo 
+    - Ex: preciso da contagem de folhas COLOR quando a impressora é colorida.
