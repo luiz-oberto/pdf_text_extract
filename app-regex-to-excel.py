@@ -1,5 +1,9 @@
+from openpyxl import Workbook
 import re
 
+'''
+FALTA AJUSTES!!!!!!!!!!!!!!!!
+'''
 
 def extrair_padroes(content, patterns):
     """Extrai padrões do conteúdo e retorna como lista."""
@@ -46,19 +50,40 @@ def processar_arquivo(input_file, output_file):
     zip_COLOR = list(zip(dados["serial_COLOR"], paginas_pb_cor_pares))
     zip_COLOR_2 = list(zip(dados["serial_COLOR_2"], paginas_pb_cor_pares))
 
-    # Escrever no arquivo de saída
-    with open(output_file, 'w', encoding="utf-8") as file:
-        for sn in zip_MONO:
-            file.write(f'{sn}\n')
-        for sn in zip_COLOR:
-            file.write(f'{sn}\n')
-        for sn in zip_COLOR_2:
-            file.write(f'{sn}\n')
 
     print('Informações extraídas com sucesso!')
 
+    return zip_MONO, zip_COLOR, zip_COLOR_2
+
 
 # Executar função principal
-processar_arquivo('texto-extraido.txt', 'texto-filtrado.txt')
+a, b, c = processar_arquivo('texto-extraido.txt', 'texto-filtrado.txt')
+
+# print(a)
+print()
+print(b)
+print()
+# print(c)
 
 
+wb = Workbook()
+
+ws = wb.active
+
+# Define título para o sheet
+ws.title = "Contagem extraída"
+
+ws['A1'] = "Número de série"
+ws['B1'] = "Número total de páginas"
+
+for i in a:
+    ws.append(i)
+
+for i in b:
+    ws.append(i[0])
+    ws.append(i[1])
+
+for i in c:
+    ws.append(i)
+
+wb.save("sample.xlsx")
