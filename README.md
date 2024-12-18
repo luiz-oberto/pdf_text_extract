@@ -32,3 +32,14 @@ pip install pillow
 2. [Poppler](https://github.com/oschwartz10612/poppler-windows/releases)
 3. [Arquivos de idioma do Tesseract](https://github.com/tesseract-ocr/tessdata)
 
+
+### No Ubuntu
+Caso esteja utilizando uma distribuição linux como o Ubuntu, utilize os seguintes comandos para fazer a instalação do Tesserect OCR:
+
+```
+sudo apt install tesseract-ocr
+```
+- para instalar o pacote de idiomas para [português](https://github.com/tesseract-ocr/tessdata_best)
+ ```
+sudo apt install tesseract-ocr-por
+```
