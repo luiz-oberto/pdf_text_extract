@@ -16,8 +16,9 @@ def processar_arquivo(input_file, output_file):
     patterns = {
         "serial_MONO": r"Número de série:X3BK03\w{4,}",
         "serial_COLOR": r"Número de série:XBJZ02\w{4,}",
+        "serial_COLOR_2": r"Número de série: XBJ\w{4,}", 
         "total_count": r"Número total de páginas:\w{3,}",
-        "paginas_pretoebranco_colorida": r"Número total de páginas a .{3,}"
+        "paginas_pb_cor": r"Número total de páginas a .{3,}"
     }
 
     # Ler o conteúdo do arquivo
@@ -32,16 +33,17 @@ def processar_arquivo(input_file, output_file):
         print("Erro: Não foram encontrados números de série suficientes.")
         return
 
-    if len(dados["paginas_pretoebranco_colorida"]) % 2 != 0:
+    if len(dados["paginas_pb_cor"]) % 2 != 0:
         print("Erro: Número de páginas P&B e Coloridas não estão agrupados corretamente.")
         return
 
     # Agrupar contadores P&B e Coloridos
-    paginas_pb_cor_pares = agrupar_pares(dados["paginas_pretoebranco_colorida"])
+    paginas_pb_cor_pares = agrupar_pares(dados["paginas_pb_cor"])
 
     # Criar zips
     zip_MONO = list(zip(dados["serial_MONO"], dados["total_count"]))
     zip_COLOR = list(zip(dados["serial_COLOR"], paginas_pb_cor_pares))
+    zip_COLOR_2 = list(zip(dados["serial_COLOR_2"], paginas_pb_cor_pares))
 
     # Escrever no arquivo de saída
     with open(output_file, 'w', encoding="utf-8") as file:
@@ -49,9 +51,13 @@ def processar_arquivo(input_file, output_file):
             file.write(f'{sn}\n')
         for sn in zip_COLOR:
             file.write(f'{sn}\n')
+        for sn in zip_COLOR_2:
+            file.write(f'{sn}\n')
 
     print('Informações extraídas com sucesso!')
 
 
 # Executar função principal
 processar_arquivo('texto-extraido.txt', 'texto-filtrado.txt')
+
+
